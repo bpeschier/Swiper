@@ -950,7 +950,7 @@ var Swiper = function (selector, params) {
     ============================================*/
     function handleKeyboardKeys (e) {
         var kc = e.keyCode || e.charCode;
-        if (kc==37 || kc==39 || kc==38 || kc==40) {
+        if (kc>=33 && kc<=40) {  // pgup pgdown end home left up right down
             var inView = false;
             //Check that swiper should be inside of visible area of window
             var swiperOffset = _this.h.getOffset( _this.container );
@@ -977,20 +977,24 @@ var Swiper = function (selector, params) {
             if (!inView) return;
         }
         if (isH) {
-            if (kc==37 || kc==39) {
+            if (kc==37 || kc==39 || kc==35 || kc==36) {
                 if (e.preventDefault) e.preventDefault();
                 else e.returnValue = false;
             }
             if (kc == 39) _this.swipeNext();
             if (kc == 37) _this.swipePrev();
+            if (kc == 35) _this.swipeTo(_this.slides.length-1);
+            if (kc == 36) _this.swipeTo(0);
         }
         else {
-            if (kc==38 || kc==40) {
+            if (kc==38 || kc==40 || kc==33 || kc==34 || kc==35 || kc==36) {
                 if (e.preventDefault) e.preventDefault();
                 else e.returnValue = false;
             }
-            if (kc == 40) _this.swipeNext();
-            if (kc == 38) _this.swipePrev();
+            if (kc == 40 || kc==34) _this.swipeNext();
+            if (kc == 38 || kc==33) _this.swipePrev();
+            if (kc == 35) _this.swipeTo(_this.slides.length-1);
+            if (kc == 36) _this.swipeTo(0);
         }
     }
         
